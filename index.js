@@ -24,6 +24,24 @@ app.get('/api/hello', function (req, res) {
   res.json({ greeting: 'hello API' });
 });
 
+//freeCodeCamp challenge
+app.get("/api/whoami", function(req, res){
+  const ipaddress = req.headers['x-forwarded-for'];
+  const language = req.headers['accept-language'];
+  const software = req.headers['user-agent'];
+
+
+if(!ipaddress || !language || !software) {
+  res.send("Error during getting data");
+}
+
+  res.json({
+    ipaddress,
+    language,
+    software
+  });
+});
+
 // listen for requests :)
 var listener = app.listen(process.env.PORT || 3000, function () {
   console.log('Your app is listening on port ' + listener.address().port);
